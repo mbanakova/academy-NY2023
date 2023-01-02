@@ -37,4 +37,9 @@ export default {};
 		line-height: 29px;
 	}
 }
+
+.discount__img img {
+	width: 100%;
+	object-fit: cover;
+}
 </style>
