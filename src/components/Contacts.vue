@@ -1,6 +1,7 @@
 <template>
-	<div class="contacts">
-		<iframe class="contacts__map" src="https://yandex.ru/map-widget/v1/-/CCUr68rJLD" allowfullscreen="true"> </iframe>
+	<div class="contacts" id="contacts">
+		<div id="map-test" class="map"></div>
+		<iframe class="contacts__map" src="https://yandex.ru/map-widget/v1/?um=constructor%3Abf180c3b22d796b4bc4859b69e1957168676c7a117cc48157c1770ba45d177f0&amp;source=constructor"></iframe>
 		<div class="container contacts__container">
 			<div class="contacts__content">
 				<h2 class="section-title contacts__title">Мы ждем вас</h2>

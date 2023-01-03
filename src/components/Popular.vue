@@ -1,7 +1,7 @@
 <template>
 	<section>
 		<h2 class="section-title">Популярные букеты</h2>
-		<Carousel :navigation="true" :pagination="true" :startAutoplay="false" :timeout="6000" v-slot="{ currentSlide }">
+		<Carousel :navigation="true" :pagination="true" :startAutoplay="true" :timeout="6000" v-slot="{ currentSlide }">
 			<Slide v-for="(slide, index) in carouselSlides" :key="index">
 				<div v-show="currentSlide === index + 1" class="slide__info">
 					<div class="slider__content">

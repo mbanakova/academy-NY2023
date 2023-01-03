@@ -1,5 +1,5 @@
 <template>
-	<section class="feedback">
+	<section class="feedback" id="feedback">
 		<h2 class="section-title">Отзывы</h2>
 		<ul class="feedback__list">
 			<li>

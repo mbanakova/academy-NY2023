@@ -4,22 +4,22 @@
 			<nav class="nav">
 				<ul class="nav__list" v-if="!mobile">
 					<li>
-						<a class="nav__link" href="#slider" v-smooth-scroll>Каталог</a>
+						<a class="nav__link" href="/#slider" v-smooth-scroll>Каталог</a>
 					</li>
 					<li>
-						<a class="nav__link" href="#tabs" v-smooth-scroll>Доставка и оплата</a>
+						<a class="nav__link" href="/#tabs" v-smooth-scroll>Доставка и оплата</a>
 					</li>
 					<li>
-						<a class="nav__link" href="#tabs" v-smooth-scroll>Отзывы</a>
+						<a class="nav__link" href="#feedback" v-smooth-scroll>Отзывы</a>
 					</li>
 					<li>
 						<router-link :to="{ name: 'Index' }" class="nav__link nav__logo" v-smooth-scroll><img src="@/assets/img/logo.svg" alt="Логотип салона botanika" width="100" height="33" /></router-link>
 					</li>
 					<li>
-						<a class="nav__link" href="#tabs" v-smooth-scroll>Спецпредложения</a>
+						<a class="nav__link" href="/#tabs" v-smooth-scroll>Спецпредложения</a>
 					</li>
 					<li>
-						<router-link :to="{ name: 'About' }" class="nav__link">Контакты</router-link>
+						<router-link :to="'/#contacts'" class="nav__link">Контакты</router-link>
 					</li>
 					<li>
 						<router-link :to="{ name: 'Cart' }" class="nav__link">Корзина</router-link>
