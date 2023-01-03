@@ -2,24 +2,24 @@
 	<section class="feedback" id="feedback">
 		<h2 class="section-title">Отзывы</h2>
 		<ul class="feedback__list">
-			<li>
-				<blockquote class="feedback__blockquote">Всё очень понравилось! Быстрое оформление заказа, выбор удобного времени доставки. Всем большое спасибо!</blockquote>
-				<cite class="feedback__author">Марина</cite>
-			</li>
-			<li>
-				<blockquote class="feedback__blockquote">Внимательные флористы, вежливые. Магазин находится прям рядом с метро. Букет очень понравился, буду ещё заказывать!</blockquote>
-				<cite class="feedback__author">Татьяна</cite>
-			</li>
-			<li>
-				<blockquote class="feedback__blockquote">Выбор букетов на любой вкус и цену. Бывают хорошие скидки, а флористы всегда помогут и точно соберут красивый букет!</blockquote>
-				<cite class="feedback__author">Ольга</cite>
+			<li v-for="(feedback, index) in feedbacks" :key="index">
+				<blockquote class="feedback__blockquote">{{ feedback.text }}</blockquote>
+				<cite class="feedback__author">{{ feedback.author }}</cite>
 			</li>
 		</ul>
 	</section>
 </template>
 
 <script>
-export default {};
+import { computed } from "vue";
+import { useStore } from "vuex";
+export default {
+	setup() {
+		const store = useStore();
+
+		return { feedbacks: computed(() => store.getters.getFeedback) };
+	},
+};
 </script>
 
 <style lang="scss" scoped>

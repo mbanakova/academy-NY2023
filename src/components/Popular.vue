@@ -1,17 +1,17 @@
 <template>
 	<section>
 		<h2 class="section-title">Популярные букеты</h2>
-		<Carousel :navigation="true" :pagination="true" :startAutoplay="true" :timeout="6000" v-slot="{ currentSlide }">
-			<Slide v-for="(slide, index) in carouselSlides" :key="index">
+		<Carousel :navigation="true" :pagination="true" :startAutoplay="false" :timeout="6000" v-slot="{ currentSlide }">
+			<Slide v-for="(slide, index) in slides" :key="index">
 				<div v-show="currentSlide === index + 1" class="slide__info">
 					<div class="slider__content">
-						<h3>Букет «Нежность»</h3>
-						<p>Элегантный букет, который станет отличным подарком на день рождения или юбилей.</p>
-						<p>30 × 40 см</p>
-						<p>3600 ₽</p>
+						<h3>{{ slide.name }}</h3>
+						<p>{{ slide.description }}</p>
+						<p>{{ slide.size }} см</p>
+						<p>{{ slide.price }} ₽</p>
 						<a class="button" href="#">Заказать</a>
 					</div>
-					<img :src="require(`@/assets/img/${slide}.png`)" alt="" />
+					<img :src="require(`@/assets/img/${slide.img}.png`)" alt="" />
 				</div>
 			</Slide>
 		</Carousel>
@@ -20,12 +20,14 @@
 <script>
 import Carousel from "@/components/slider/Carousel.vue";
 import Slide from "@/components/slider/Slide.vue";
+import { computed } from "vue";
+import { useStore } from "vuex";
 export default {
 	components: { Carousel, Slide },
 	setup() {
-		const carouselSlides = ["popular", "popular-2"];
+		const store = useStore();
 
-		return { carouselSlides };
+		return { slides: computed(() => store.getters.getSlides) };
 	},
 };
 </script>
@@ -39,6 +41,7 @@ export default {
 	height: 438px;
 
 	img {
+		max-height: 410px;
 		object-fit: cover;
 	}
 }
@@ -52,6 +55,11 @@ export default {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
+	flex-grow: 1;
+
+	& .button {
+		margin-top: auto;
+	}
 }
 
 //animation

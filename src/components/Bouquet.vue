@@ -1,5 +1,5 @@
 <template>
-	<section class="bouquet">
+	<section class="bouquet" id="bouquet">
 		<h2>Выбор букета</h2>
 
 		<ul class="bouquet__list">

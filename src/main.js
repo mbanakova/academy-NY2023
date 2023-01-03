@@ -8,7 +8,7 @@ const app = createApp(App)
 app.use(store)
 app.use(router)
 app.use(VueSmoothScroll, {
-  duration: 1000,
+  duration: 1300,
   offset: -30,
   updateHistory: false
 })

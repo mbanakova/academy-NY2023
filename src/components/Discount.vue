@@ -1,5 +1,5 @@
 <template>
-	<section class="discount">
+	<section class="discount" id="discount">
 		<div class="discount__content">
 			<h2 class="section-title">Скидка 10% на&nbsp;первый заказ</h2>
 			<p>Если заказываете у нас букет впервые — при оформлении заказа введите промокод «Botanika2021» и получите скидку 10%.</p>
