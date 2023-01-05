@@ -1,10 +1,13 @@
 <template>
 	<section class="hero">
 		<div class="hero__top">
-			<div>
+			<div class="hero__content">
 				<h2 class="title hero__title">Авторские букеты<br /><span>в Петербурге</span></h2>
 				<p class="hero__text">Оригинальные свежие букеты с доставкой по всему городу</p>
-				<a class="button" href="#" @click="getClickCoords">Смотреть каталог</a>
+				<a class="button" href="#" ref="wrapper" @mousemove="spawnBubbles" @mouseleave="removeBubbles"
+					>Смотреть каталог
+					<span class="bubble" v-if="bubble.isOnTarget" :style="{ left: bubble.left, top: bubble.top }"></span>
+				</a>
 			</div>
 			<div class="hero__img-list">
 				<div class="hero__img">
@@ -20,60 +23,38 @@
 
 <script>
 import Features from "@/components/Features.vue";
-import { ref } from "vue";
-
+import { ref, reactive } from "vue";
 export default {
 	components: { Features },
-	// methods: {
-	// 	getClickCoords(event) {
-	// 		const rect = this.$refs.button1.getBoundingClientRect();
-	// 		console.log(rect);
-	// 		console.log(event);
-	// 		console.log(this.$refs);
-	// 		const x = Math.round(event.clientX - rect.left);
-	// 		const y = Math.round(event.clientY - rect.top);
-	// 		console.log(x, y);
-	// 		return { x, y };
-	// 	},
-	// },
 	setup() {
-		const button = ref("button1");
-		function getClickCoords(event) {
-			console.log(button);
-			const rect = button.value.getBoundingClientRect();
+		const bubble = reactive({
+			isOnTarget: false,
+			left: 0,
+			top: 0,
+		});
+		const wrapper = ref(null);
 
-			console.log(event);
-			console.log(this.$refs);
-			const x = Math.round(event.clientX - rect.left);
-			const y = Math.round(event.clientY - rect.top);
-			console.log(x, y);
-			return { x, y };
+		function spawnBubbles(event) {
+			const rect = wrapper.value.getBoundingClientRect();
+
+			const left = Math.round(event.clientX - rect.left);
+			const top = Math.round(event.clientY - rect.top);
+
+			bubble.left = `${left}px`;
+			bubble.top = `${top}px`;
+
+			bubble.isOnTarget = true;
 		}
 
-		const buttons = document.querySelectorAll(".button");
-		buttons.forEach(btn => {
-			btn.addEventListener("mousemove", function (evt) {
-				getClickCoords(btn, evt);
-
-				const coords = getClickCoords(btn, evt);
-				const x = coords.x;
-				const y = coords.y;
-
-				const bubbles = document.createElement("span");
-				bubbles.classList.add("bubble");
-				bubbles.style.left = `${x}px`;
-				bubbles.style.top = `${y}px`;
-				this.appendChild(bubbles);
-
-				setTimeout(() => {
-					bubbles.remove();
-				}, 1000);
-			});
-		});
+		function removeBubbles() {
+			bubble.isOnTarget = false;
+		}
 
 		return {
-			getClickCoords,
-			button,
+			spawnBubbles,
+			removeBubbles,
+			bubble,
+			wrapper,
 		};
 	},
 };
@@ -85,6 +66,12 @@ export default {
 	grid-template-columns: 1fr 2fr;
 	grid-column-gap: 24px;
 	margin-bottom: 48px;
+}
+
+.hero__content {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
 }
 
 .hero__img-list {
@@ -117,6 +104,30 @@ export default {
 
 	&:last-child {
 		padding-top: 0;
+	}
+}
+
+.bubble {
+	position: absolute;
+	background-color: $white;
+	transform: translate(-50%, -50%);
+	pointer-events: none;
+	border-radius: 50%;
+	z-index: 10;
+	animation: bubbles 1s linear infinite;
+}
+
+@keyframes bubbles {
+	0% {
+		width: 0;
+		height: 0;
+		opacity: 0.3;
+	}
+
+	100% {
+		width: 100px;
+		height: 100px;
+		opacity: 0;
 	}
 }
 </style>

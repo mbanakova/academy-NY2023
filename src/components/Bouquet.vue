@@ -3,31 +3,13 @@
 		<h2>Выбор букета</h2>
 
 		<ul class="bouquet__list">
-			<li class="bouquet__list-item">
+			<li class="bouquet__list-item" v-for="(bouquet, index) in bouquets" :key="index">
 				<div class="bouquet__img">
-					<img src="@/assets/img/select-1.jpg" alt="Букет 1" width="387" height="442" />
+					<img :src="require(`@/assets/img/${bouquet.img}`)" :alt="bouquet.title" width="387" height="442" />
 				</div>
 				<a class="bouquet__link" href="#">
-					<h3 class="section-title bouquet__title">Свадебные букеты</h3>
-					<p class="bouquet__text">Букеты для невест</p>
-				</a>
-			</li>
-			<li class="bouquet__list-item">
-				<div class="bouquet__img">
-					<img src="@/assets/img/select-2.jpg" alt="Букет 2" width="387" height="442" />
-				</div>
-				<a class="bouquet__link" href="#">
-					<h3 class="section-title bouquet__title">Букеты с пионами</h3>
-					<p class="bouquet__text">Букеты с сезонными пионами</p>
-				</a>
-			</li>
-			<li class="bouquet__list-item">
-				<div class="bouquet__img">
-					<img src="@/assets/img/select-3.jpg" alt="Букет 3" width="387" height="442" />
-				</div>
-				<a class="bouquet__link" href="#">
-					<h3 class="section-title bouquet__title">Выбрать букет</h3>
-					<p class="bouquet__text">Букеты в ассортименте</p>
+					<h3 class="section-title bouquet__title">{{ bouquet.title }}</h3>
+					<p class="bouquet__text">{{ description }}</p>
 				</a>
 			</li>
 		</ul>
@@ -35,7 +17,15 @@
 </template>
 
 <script>
-export default {};
+import { computed } from "vue";
+import { useStore } from "vuex";
+export default {
+	setup() {
+		const store = useStore();
+
+		return { bouquets: computed(() => store.getters.getBouquets) };
+	},
+};
 </script>
 
 <style lang="scss" scoped>

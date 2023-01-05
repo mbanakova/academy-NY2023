@@ -85,12 +85,16 @@ section {
 }
 
 .button {
+	position: relative;
 	background-color: $medium;
 	color: $white;
+	display: block;
 	text-decoration: none;
+	text-align: center;
 	padding: 30px 70px;
 	border-radius: 40px;
 	transition: $tr;
+	overflow: hidden;
 	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
 

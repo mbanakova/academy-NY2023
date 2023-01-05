@@ -3,25 +3,11 @@
 		<h2 class="features__title">Наши преимущества</h2>
 
 		<ul class="features__list">
-			<li>
-				<img src="@/assets/img/advantage-1.svg" alt="Иконка грузовика" width="82" height="52" />
+			<li v-for="(feature, index) in features" :key="index">
+				<img :src="require(`@/assets/img/${feature.svg}`)" :alt="feature.title" width="82" height="52" />
 				<div>
-					<h3 class="features__list-title">Быстрая доставка</h3>
-					<p>Можем собрать букет и передать его в доставку всего за час.</p>
-				</div>
-			</li>
-			<li>
-				<img src="@/assets/img/advantage-2.svg" alt="Иконка букета цветов" width="52" height="52" />
-				<div>
-					<h3 class="features__list-title">Всегда свежие цветы</h3>
-					<p>Тщательно следим за состоянием цветов, а опытные флористы отбирают для букетов каждый цветок.</p>
-				</div>
-			</li>
-			<li>
-				<img src="@/assets/img/advantage-3.svg" alt="Иконка фотоаппарата" width="59" height="52" />
-				<div>
-					<h3 class="features__list-title">Отправляем фото цветов</h3>
-					<p>Перед доставкой сделаем фотографию букета и отправим вам.</p>
+					<h3 class="features__list-title">{{ feature.title }}</h3>
+					<p>{{ feature.description }}</p>
 				</div>
 			</li>
 		</ul>
@@ -29,7 +15,15 @@
 </template>
 
 <script>
-export default {};
+import { computed } from "vue";
+import { useStore } from "vuex";
+export default {
+	setup() {
+		const store = useStore();
+
+		return { features: computed(() => store.getters.getFeatures) };
+	},
+};
 </script>
 
 <style lang="scss" scoped>

@@ -11,7 +11,7 @@
 						<p>{{ slide.price }} ₽</p>
 						<a class="button" href="#">Заказать</a>
 					</div>
-					<img :src="require(`@/assets/img/${slide.img}.png`)" alt="" />
+					<img :src="require(`@/assets/img/${slide.img}`)" :alt="slide.name" />
 				</div>
 			</Slide>
 		</Carousel>
