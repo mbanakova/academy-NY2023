@@ -47,6 +47,7 @@ body {
 	overflow-y: scroll;
 
 	@media (max-width: $tablet) {
+		padding-top: 0;
 		&.no-scroll {
 			overflow-y: hidden;
 		}

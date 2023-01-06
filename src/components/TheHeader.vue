@@ -27,7 +27,7 @@
 				</ul>
 
 				<div class="mobile-menu" v-if="mobile">
-					<p class="mobile-menu__title">Menu</p>
+					<p class="mobile-menu__title" :class="{ 'is-active': mobileNav }">Меню</p>
 					<button class="hamburger" @click="toggleHamburger" :class="{ 'is-active': mobileNav }">
 						<div class="bar"></div>
 					</button>
@@ -37,33 +37,22 @@
 					<div class="mobile-nav" v-if="mobileNav">
 						<ul class="mobile-nav__list">
 							<li>
-								<a class="nav__link" href="#slider" v-smooth-scroll @click="toggleHamburger">Каталог</a>
+								<a class="nav__link" href="#bouquet" v-smooth-scroll @click="toggleHamburger">Каталог</a>
 							</li>
 							<li>
 								<a class="nav__link" href="#tabs" v-smooth-scroll @click="toggleHamburger">Доставка и оплата</a>
 							</li>
 							<li>
-								<a class="nav__link" href="#tabs" v-smooth-scroll @click="toggleHamburger">Отзывы</a>
+								<a class="nav__link" href="#feedback" v-smooth-scroll @click="toggleHamburger">Отзывы</a>
 							</li>
 							<li>
-								<a class="nav__link" href="#tabs" v-smooth-scroll @click="toggleHamburger">Спецпредложения</a>
+								<a class="nav__link" href="#discount" v-smooth-scroll @click="toggleHamburger">Спецпредложения</a>
 							</li>
 							<li>
-								<router-link :to="{ name: 'About' }" class="nav__link">Контакты</router-link>
+								<a class="nav__link" href="#contacts" v-smooth-scroll @click="toggleHamburger">Контакты</a>
 							</li>
 							<li>
-								<router-link :to="{ name: 'Cart' }" class="nav__link">Корзина</router-link>
-							</li>
-						</ul>
-						<ul class="mobile-nav__contacts">
-							<li>
-								<a class="nav__link" href="#"><font-awesome icon="envelope" /> </a>
-							</li>
-							<li>
-								<a class="nav__link" href="#"><font-awesome icon="phone" /> </a>
-							</li>
-							<li>
-								<a class="nav__link" href="#"><font-awesome icon="piggy-bank" /> </a>
+								<a class="nav__link" href="#" v-smooth-scroll @click="toggleHamburger">Корзина</a>
 							</li>
 						</ul>
 					</div>
@@ -110,6 +99,10 @@ export default {
 	border-top: 1px solid $dark;
 	border-bottom: 1px solid $dark;
 	margin-bottom: 80px;
+
+	@media (max-width: $mobile) {
+		border: none;
+	}
 }
 .header__container {
 	display: flex;
@@ -146,9 +139,33 @@ export default {
 	color: $dark;
 	text-align: center;
 	transition: $tr;
+	position: relative;
+
+	&::after {
+		position: absolute;
+		content: "";
+		left: 10px;
+		bottom: 8px;
+		width: 0;
+		height: 2px;
+		transition: $tr;
+		background-color: $light;
+		@media (max-width: $mobile) {
+			display: none;
+		}
+	}
+
+	&:hover::after {
+		width: calc(100% - 20px);
+	}
+
+	&.nav__logo:hover::after {
+		width: 0;
+	}
 }
 
 .mobile-menu {
+	position: relative;
 	margin-left: auto;
 	display: flex;
 	gap: 10px;
@@ -157,10 +174,16 @@ export default {
 	z-index: 10;
 	top: 15px;
 	right: 0;
+	z-index: 120;
 }
 
 .mobile-menu__title {
 	margin: 0;
+	color: $medium;
+
+	&.is-active {
+		color: $white;
+	}
 }
 
 .hamburger {
@@ -182,20 +205,24 @@ export default {
 		width: 100%;
 		height: 3px;
 		border-radius: 2px;
+		background-color: $medium;
 		margin: 6px 0;
 		transition: 0.5s ease-in-out all;
 	}
 
 	&.is-active::before {
 		transform: rotate(-225deg) translate(6px, -7px);
+		background-color: $white;
 	}
 
 	&.is-active .bar {
 		transform: translateX(100%);
 		opacity: 0;
+		background-color: $white;
 	}
 	&.is-active::after {
 		transform: rotate(225deg) translate(6px, 7px);
+		background-color: $white;
 	}
 }
 
@@ -211,15 +238,17 @@ export default {
 	position: fixed;
 	width: 100%;
 	height: 100vh;
+	background-color: $medium;
 	top: 0;
 	right: 0;
 	margin: 0;
 	padding: 50px 20px;
+	z-index: 100;
 	list-style: none;
 	transition: opacity 0.8s 0.6s, clip-path 0.6s 0.4s;
 
 	& .nav__link {
-		color: $light;
+		color: $white;
 	}
 }
 
